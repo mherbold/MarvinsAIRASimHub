@@ -103,8 +103,9 @@ namespace MarvinsAIRASimHub
 
 			this.AttachDelegate( name: "LFEScale", valueProvider: () => telemetryData.lfeScale );
 
-			this.AttachDelegate( name: "FFNInAmount", valueProvider: () => telemetryData.ffbInAmount );
+			this.AttachDelegate( name: "FFBInAmount", valueProvider: () => telemetryData.ffbInAmount );
 			this.AttachDelegate( name: "FFBOutAmount", valueProvider: () => telemetryData.ffbOutAmount );
+			this.AttachDelegate( name: "FFBClipping", valueProvider: () => telemetryData.ffbClipping );
 			this.AttachDelegate( name: "YawRateFactor", valueProvider: () => telemetryData.yawRateFactor );
 			this.AttachDelegate( name: "GForce", valueProvider: () => telemetryData.gForce );
 			this.AttachDelegate( name: "UndersteerAmount", valueProvider: () => telemetryData.understeerAmount );
