@@ -48,6 +48,12 @@ namespace MarvinsAIRASimHub
 		public float understeerAmount;
 		public float oversteerAmount;
 		public bool crashProtectionEngaged;
+
+		public bool forceFeedbackEnabled;
+		public bool steeringEffectsEnabled;
+		public bool lfeToFFBEnabled;
+		public bool windSimulatorEnabled;
+		public bool spotterEnabled;
 	}
 
 	[PluginDescription( "Marvin's Awesome iRacing App Data Plugin" )]
@@ -66,9 +72,14 @@ namespace MarvinsAIRASimHub
 		private TelemetryData telemetryData = new TelemetryData();
 		private MemoryMappedFile memoryMappedFile = null;
 		private MemoryMappedViewAccessor memoryMappedFileViewAccessor = null;
+
 		private bool faulted = false;
 		private bool connected = false;
-		private int nextAttempt = 0;
+
+		private int nextMemoryMappedFileAttempt = 0;
+		private int nextConnectedCheck = 0;
+
+		private int lastTickCount = 0;
 
 		public void Init( PluginManager pluginManager )
 		{
@@ -111,6 +122,12 @@ namespace MarvinsAIRASimHub
 			this.AttachDelegate( name: "UndersteerAmount", valueProvider: () => telemetryData.understeerAmount );
 			this.AttachDelegate( name: "OversteerAmount", valueProvider: () => telemetryData.oversteerAmount );
 			this.AttachDelegate( name: "CrashProtectionEngaged", valueProvider: () => telemetryData.crashProtectionEngaged );
+
+			this.AttachDelegate( name: "ForceFeedbackEnabled", valueProvider: () => telemetryData.forceFeedbackEnabled );
+			this.AttachDelegate( name: "SteeringEffectsEnabled", valueProvider: () => telemetryData.steeringEffectsEnabled );
+			this.AttachDelegate( name: "LFEToFFBEnabled", valueProvider: () => telemetryData.lfeToFFBEnabled );
+			this.AttachDelegate( name: "WindSimulatorEnabled", valueProvider: () => telemetryData.windSimulatorEnabled );
+			this.AttachDelegate( name: "SpotterEnabled", valueProvider: () => telemetryData.spotterEnabled );
 		}
 
 		public void End( PluginManager pluginManager )
@@ -128,7 +145,7 @@ namespace MarvinsAIRASimHub
 			{
 				if ( memoryMappedFile == null )
 				{
-					if ( Environment.TickCount >= nextAttempt )
+					if ( Environment.TickCount >= nextMemoryMappedFileAttempt )
 					{
 						try
 						{
@@ -136,7 +153,7 @@ namespace MarvinsAIRASimHub
 						}
 						catch ( FileNotFoundException )
 						{
-							nextAttempt = Environment.TickCount + 5000;
+							nextMemoryMappedFileAttempt = Environment.TickCount + 5000;
 						}
 					}
 				}
@@ -146,11 +163,16 @@ namespace MarvinsAIRASimHub
 					if ( memoryMappedFileViewAccessor == null )
 					{
 						memoryMappedFileViewAccessor = memoryMappedFile.CreateViewAccessor();
-
-						connected = true;
 					}
 
 					memoryMappedFileViewAccessor?.Read( 0, out telemetryData );
+
+					if ( Environment.TickCount >= nextConnectedCheck )
+					{
+						connected = telemetryData.tickCount != lastTickCount;
+						lastTickCount = telemetryData.tickCount;
+						nextConnectedCheck = Environment.TickCount + 1000;
+					}
 				}
 			}
 			catch
