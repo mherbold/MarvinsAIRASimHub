@@ -54,6 +54,10 @@ namespace MarvinsAIRASimHub
 		public bool lfeToFFBEnabled;
 		public bool windSimulatorEnabled;
 		public bool spotterEnabled;
+
+		public float overallScaleAutoPeak;
+
+		public bool curbProtectionEngaged;
 	}
 
 	[PluginDescription( "Marvin's Awesome iRacing App Data Plugin" )]
@@ -93,6 +97,7 @@ namespace MarvinsAIRASimHub
 			this.AttachDelegate( name: "WheelMax", valueProvider: () => telemetryData.wheelMax );
 			this.AttachDelegate( name: "OverallScale", valueProvider: () => telemetryData.overallScale );
 			this.AttachDelegate( name: "OverallScaleAutoReady", valueProvider: () => telemetryData.overallScaleAutoReady );
+			this.AttachDelegate( name: "OverallScaleAutoPeak", valueProvider: () => telemetryData.overallScaleAutoPeak );
 			this.AttachDelegate( name: "OverallScaleAutoClipLimit", valueProvider: () => telemetryData.overallScaleAutoClipLimit );
 			this.AttachDelegate( name: "DetailScale", valueProvider: () => telemetryData.detailScale );
 			this.AttachDelegate( name: "ParkedScale", valueProvider: () => telemetryData.parkedScale );
@@ -122,6 +127,7 @@ namespace MarvinsAIRASimHub
 			this.AttachDelegate( name: "UndersteerAmount", valueProvider: () => telemetryData.understeerAmount );
 			this.AttachDelegate( name: "OversteerAmount", valueProvider: () => telemetryData.oversteerAmount );
 			this.AttachDelegate( name: "CrashProtectionEngaged", valueProvider: () => telemetryData.crashProtectionEngaged );
+			this.AttachDelegate( name: "CurbProtectionEngaged", valueProvider: () => telemetryData.curbProtectionEngaged );
 
 			this.AttachDelegate( name: "ForceFeedbackEnabled", valueProvider: () => telemetryData.forceFeedbackEnabled );
 			this.AttachDelegate( name: "SteeringEffectsEnabled", valueProvider: () => telemetryData.steeringEffectsEnabled );
