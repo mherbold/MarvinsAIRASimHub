@@ -58,6 +58,9 @@ namespace MarvinsAIRASimHub
 		public float overallScaleAutoPeak;
 
 		public bool curbProtectionEngaged;
+
+		public float ffbSteadyState;
+		public float shockVelocity;
 	}
 
 	[PluginDescription( "Marvin's Awesome iRacing App Data Plugin" )]
@@ -110,22 +113,26 @@ namespace MarvinsAIRASimHub
 			this.AttachDelegate( name: "UndersteerYRFactorLEnd", valueProvider: () => telemetryData.understeerYRFactorLEnd );
 			this.AttachDelegate( name: "UndersteerYRFactorRStart", valueProvider: () => telemetryData.understeerYRFactorRStart );
 			this.AttachDelegate( name: "UndersteerYRFactorREnd", valueProvider: () => telemetryData.understeerYRFactorREnd );
+			this.AttachDelegate( name: "UndersteerAmount", valueProvider: () => telemetryData.understeerAmount );
 
 			this.AttachDelegate( name: "OversteerFxStyle", valueProvider: () => telemetryData.oversteerFxStyle );
 			this.AttachDelegate( name: "OversteerFxStrength", valueProvider: () => telemetryData.oversteerFxStrength );
 			this.AttachDelegate( name: "OversteerFxCurve", valueProvider: () => telemetryData.oversteerFxCurve );
 			this.AttachDelegate( name: "OversteerYVelocityStart", valueProvider: () => telemetryData.oversteerYVelocityStart );
 			this.AttachDelegate( name: "OversteerYVelocityEnd", valueProvider: () => telemetryData.oversteerYVelocityEnd );
+			this.AttachDelegate( name: "OversteerAmount", valueProvider: () => telemetryData.oversteerAmount );
 
 			this.AttachDelegate( name: "LFEScale", valueProvider: () => telemetryData.lfeScale );
 
 			this.AttachDelegate( name: "FFBInAmount", valueProvider: () => telemetryData.ffbInAmount );
 			this.AttachDelegate( name: "FFBOutAmount", valueProvider: () => telemetryData.ffbOutAmount );
+			this.AttachDelegate( name: "FFBSteadyState", valueProvider: () => telemetryData.ffbSteadyState );
 			this.AttachDelegate( name: "FFBClipping", valueProvider: () => telemetryData.ffbClipping );
+
 			this.AttachDelegate( name: "YawRateFactor", valueProvider: () => telemetryData.yawRateFactor );
 			this.AttachDelegate( name: "GForce", valueProvider: () => telemetryData.gForce );
-			this.AttachDelegate( name: "UndersteerAmount", valueProvider: () => telemetryData.understeerAmount );
-			this.AttachDelegate( name: "OversteerAmount", valueProvider: () => telemetryData.oversteerAmount );
+			this.AttachDelegate( name: "ShockVelocity", valueProvider: () => telemetryData.shockVelocity );
+
 			this.AttachDelegate( name: "CrashProtectionEngaged", valueProvider: () => telemetryData.crashProtectionEngaged );
 			this.AttachDelegate( name: "CurbProtectionEngaged", valueProvider: () => telemetryData.curbProtectionEngaged );
 
