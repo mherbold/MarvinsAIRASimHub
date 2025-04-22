@@ -41,7 +41,7 @@ namespace MarvinsAIRASimHub
 		public float lfeScale;
 
 		public float ffbInAmount;
-		public int ffbOutAmount;
+		public float ffbOutAmount;
 		public bool ffbClipping;
 		public float yawRateFactor;
 		public float gForce;
