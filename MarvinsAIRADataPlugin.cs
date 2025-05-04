@@ -63,6 +63,7 @@ namespace MarvinsAIRASimHub
 		public float shockVelocity;
 		public float lfeInAmount;
 		public float lfeOutAmount;
+		public float ffbCurve;
 	}
 
 	[PluginDescription( "Marvin's Awesome iRacing App Data Plugin" )]
@@ -130,6 +131,7 @@ namespace MarvinsAIRASimHub
 
 			this.AttachDelegate( name: "FFBInAmount", valueProvider: () => telemetryData.ffbInAmount );
 			this.AttachDelegate( name: "FFBOutAmount", valueProvider: () => telemetryData.ffbOutAmount );
+			this.AttachDelegate( name: "FFBCurve", valueProvider: () => telemetryData.ffbCurve );
 			this.AttachDelegate( name: "FFBSteadyState", valueProvider: () => telemetryData.ffbSteadyState );
 			this.AttachDelegate( name: "FFBClipping", valueProvider: () => telemetryData.ffbClipping );
 
